@@ -1,3 +1,4 @@
+#Made for the sole purpose of GCI 2019
 from tkinter import *
 from tkinter import messagebox
 a=0
@@ -8,7 +9,7 @@ l=[["cat.png","A pet and animal","cat","Card 1"],
        ["bell.png","Used as a physical notification\Catches attention when ringed","bell","Card 4"],
        ["ball.png","Used to play games with","ball","Card 5"],
        ["hglass.png","Used as a timer in old times","hourglass","Card 6"],
-       ["bulb.png","Used as a source of light","bulb","card 7"],
+       ["bulb.png","Used as a source of light","bulb","Card 7"],
        ["gavel.png", "Used by judges in the court", "gavel", "Card 8"],
        ["saw.png","Used in cutting things","saw","Card 9"],
        ["cross.png","Definately not a single letter","cross","card 10"]]
@@ -43,17 +44,6 @@ def startgame(event):
 
 def gamegui():
     global a
-    if a>9:
-        AT = Username.get()
-        label4= Label(root2, text="Game Over!", font=("roboto", 30), bg="#220047",
-                       fg="#CE9141")
-        label4.place(x=200, y=100)
-        label5= Label(root2, text=AT+" Wins!", font=("roboto", 30), bg="#220047",
-                       fg="#CE9141")
-        label5.place(x=200, y=200)
-        return None
-
-
     global tmpl
     global answer
     global label1
@@ -81,7 +71,7 @@ def gamegui():
                    fg="#CE9141")
     label3.place(x=120, y=312)
     entry2 = Entry(root2, textvar=answer, width=20)
-    entry2.place(x=360, y=320)
+    entry2.place(x=347, y=319)
     button3 = Button(root2, text="Submit", font=("roboto", 15), bg="#CE9141", fg="#220047", activeforeground="#CE9141",
                      activebackground="#220047")
     button3.bind("<Button-1>", check)
@@ -94,6 +84,9 @@ def gamegui():
 def timer():
     global time
     global labeltmp
+    if a==10:
+        label1.place_forget()
+        return None
     if len(str(time))==1:
         x="0"+str(time)
     else:
@@ -116,18 +109,10 @@ def check(event):
     tmpstr=answer.get()
     if tmpstr==tmpl[2]:
         if a==9:
-            messagebox.showinfo("Correct","That is the correct answer!")
-            a+=1
-            label1.place_forget()
-            label2.place_forget()
-            label3.place_forget()
-            button2.place_forget()
-            button3.place_forget()
-            entry2.place_forget()
-            image1.place_forget()
-            labeltmp.place_forget()
-            time = 30
-            gamegui()
+            AT = Username.get()
+            messagebox.showinfo("Correct","That is the correct answer!\n Game over\n"+AT+"Wins!")
+            root2.destroy()
+            return None
         else:
             messagebox.showinfo("Correct", "That is the correct answer, you have advanced to the next level!")
             a+= 1
@@ -137,8 +122,6 @@ def check(event):
             button2.place_forget()
             button3.place_forget()
             entry2.place_forget()
-            image1.place_forget()
-            labeltmp.place_forget()
             time = 15
             gamegui()
     elif tmpstr!=tmpl[2]:
@@ -146,4 +129,5 @@ def check(event):
 
 
 main1()
+
 
