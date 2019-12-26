@@ -1,14 +1,15 @@
 from tkinter import *
 from tkinter import messagebox
 a=0
+time=15
 l=[["cat.png","A pet and animal","cat","Card 1"],
        ["die.png","Used to make moves in board games","dice","Card 2"],
        ["buck.png","Water storage","bucket","Card 3"],
        ["bell.png","Used as a physical notification\Catches attention when ringed","bell","Card 4"],
        ["ball.png","Used to play games with","ball","Card 5"],
        ["hglass.png","Used as a timer in old times","hourglass","Card 6"],
-       ["gavel.png","Used by judges in the court","gavel","Card 7"],
-       ["bulb.png","Used as a source of light","bulb","card 8"],
+       ["bulb.png","Used as a source of light","bulb","card 7"],
+       ["gavel.png", "Used by judges in the court", "gavel", "Card 8"],
        ["saw.png","Used in cutting things","saw","Card 9"],
        ["cross.png","Definately not a single letter","cross","card 10"]]
 def main1():
@@ -38,6 +39,7 @@ def startgame(event):
     root2.resizable(0, 0)
     root2.geometry("600x400")
     gamegui()
+
 def gamegui():
     global a
     if a>9:
@@ -86,12 +88,30 @@ def gamegui():
     filename = PhotoImage(file=tmpd)
     image1= Label(image=filename)
     image1.place(x=150, y=90, relwidth=.5, relheight=.5)
+    timer()
     root2.mainloop()
+def timer():
+    global time
+    global labeltmp
+    if len(str(time))==1:
+        x="0"+str(time)
+    else:
+        x=str(time)
+    if time!=0:
+        labeltmp=Label(root2, text="Time left: "+x, font=("roboto", 15), bg="#220047",fg="#CE9141")
+        labeltmp.place(x=10, y=70)
+        time-=1
+        root2.after(1000,timer)
+    if time==0:
+        messagebox.showinfo("Lost","Time ran out,you lose!")
+        root2.destroy()
+        return None
 def hint(event):
     tmpstr=tmpl[1]
     messagebox.showinfo("Hint",tmpstr)
 def check(event):
     global a
+    global time
     tmpstr=answer.get()
     if tmpstr==tmpl[2]:
         if a==9:
@@ -109,6 +129,8 @@ def check(event):
     button3.place_forget()
     entry2.place_forget()
     image1.place_forget()
+    labeltmp.place_forget()
+    time=15
     gamegui()
 
 main1()
