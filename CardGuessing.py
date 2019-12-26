@@ -38,6 +38,7 @@ def startgame(event):
     root2 = Tk()
     root2.resizable(0, 0)
     root2.geometry("600x400")
+    timer()
     gamegui()
 
 def gamegui():
@@ -88,7 +89,7 @@ def gamegui():
     filename = PhotoImage(file=tmpd)
     image1= Label(image=filename)
     image1.place(x=150, y=90, relwidth=.5, relheight=.5)
-    timer()
+
     root2.mainloop()
 def timer():
     global time
@@ -117,20 +118,32 @@ def check(event):
         if a==9:
             messagebox.showinfo("Correct","That is the correct answer!")
             a+=1
+            label1.place_forget()
+            label2.place_forget()
+            label3.place_forget()
+            button2.place_forget()
+            button3.place_forget()
+            entry2.place_forget()
+            image1.place_forget()
+            labeltmp.place_forget()
+            time = 30
+            gamegui()
         else:
             messagebox.showinfo("Correct", "That is the correct answer, you have advanced to the next level!")
             a+= 1
+            label1.place_forget()
+            label2.place_forget()
+            label3.place_forget()
+            button2.place_forget()
+            button3.place_forget()
+            entry2.place_forget()
+            image1.place_forget()
+            labeltmp.place_forget()
+            time = 15
+            gamegui()
     elif tmpstr!=tmpl[2]:
         messagebox.showinfo("Wrong", "That is the incorrect answer, answer correctly to advance to the next level!")
-    label1.place_forget()
-    label2.place_forget()
-    label3.place_forget()
-    button2.place_forget()
-    button3.place_forget()
-    entry2.place_forget()
-    image1.place_forget()
-    labeltmp.place_forget()
-    time=15
-    gamegui()
+
 
 main1()
+
