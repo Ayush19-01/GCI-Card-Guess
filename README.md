@@ -6,7 +6,7 @@
   
   2. Make sure the files are in the same directory, or it will raise a problem.
   
-  3. Run the program in a terminal and enjoy!
+  3. Run the program in a terminal or any IDE and enjoy!
 ### How to play
   1. An image would be presented in front you and you have to guess what that image is.
   
