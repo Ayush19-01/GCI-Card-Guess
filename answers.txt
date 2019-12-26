@@ -1,0 +1,11 @@
+Answers of the cards:
+cat
+dice
+bucket
+bell
+ball
+hourglass
+bulb
+gavel
+saw
+cross
