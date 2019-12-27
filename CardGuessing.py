@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 a=0
 time=15
+case=True
 l=[["cat.png","A pet and animal","cat","Card 1"],
        ["die.png","Used to make moves in board games","dice","Card 2"],
        ["buck.png","Water storage","bucket","Card 3"],
@@ -84,6 +85,7 @@ def gamegui():
 def timer():
     global time
     global labeltmp
+    global case
     if a==10:
         label1.place_forget()
         return None
@@ -91,29 +93,43 @@ def timer():
         x="0"+str(time)
     else:
         x=str(time)
-    if time!=0:
-        labeltmp=Label(root2, text="Time left: "+x, font=("roboto", 15), bg="#220047",fg="#CE9141")
-        labeltmp.place(x=10, y=70)
-        time-=1
-        root2.after(1000,timer)
-    if time==0:
-        messagebox.showinfo("Lost","Time ran out,you lose!")
-        root2.destroy()
-        return None
+    if case==True:
+        if time!=0:
+            labeltmp=Label(root2, text="Time left: "+x, font=("roboto", 15), bg="#220047",fg="#CE9141")
+            labeltmp.place(x=10, y=70)
+            time-=1
+            root2.after(1000,timer)
+        if time==0:
+            messagebox.showinfo("Lost","Time ran out,you lose!")
+            root2.destroy()
+            return None
+    elif case==False:
+        if time!=0:
+            labeltmp=Label(root2, text="Time left: "+x, font=("roboto", 15), bg="#220047",fg="#CE9141")
+            labeltmp.place(x=10, y=70)
+            root2.after(1000,timer)
+        if time==0:
+            messagebox.showinfo("Lost","Time ran out,you lose!")
+            root2.destroy()
+            return None
+
 def hint(event):
     tmpstr=tmpl[1]
     messagebox.showinfo("Hint",tmpstr)
 def check(event):
     global a
     global time
+    global case
     tmpstr=answer.get()
     if tmpstr==tmpl[2]:
         if a==9:
             AT = Username.get()
-            messagebox.showinfo("Correct","That is the correct answer!\n Game over\n"+AT+"Wins!")
+            case=False
+            messagebox.showinfo("Win","That is the correct answer!\n Game over\n"+AT+"Wins!")
             root2.destroy()
             return None
         else:
+            case=False
             messagebox.showinfo("Correct", "That is the correct answer, you have advanced to the next level!")
             a+= 1
             label1.place_forget()
@@ -123,11 +139,13 @@ def check(event):
             button3.place_forget()
             entry2.place_forget()
             time = 15
+            case=True
             gamegui()
     elif tmpstr!=tmpl[2]:
+        case=False
         messagebox.showinfo("Wrong", "That is the incorrect answer, answer correctly to advance to the next level!")
-
-
+        case=True
 main1()
+
 
 
