@@ -1,6 +1,6 @@
 # GCI-Card-Guess
 ## Card Guessing Game
-### How to intialize
+### How to initialize
 
   1. To have a perfect game make sure you download all the files in the repository.
   
